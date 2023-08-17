@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://my-json-server.typicode.com/typicode/demo/posts",
+  baseURL: "https://my-json-server.typicode.com/typicode/demo/db/",
 });
 
 instance.interceptors.request.use(
@@ -11,6 +11,7 @@ instance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export const fetcList = () => {
-  return instance.get("", {});
+export const fetchList = () => {
+
+    return instance.get("", {});
 };

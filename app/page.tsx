@@ -1,30 +1,24 @@
 "use client";
 
-import { fetcList } from "@/app/services/api";
+import { fetchList } from "@/app/services/api";
 import { useQuery } from "@tanstack/react-query";
+import ListPage from "@/app/containers/listPage";
+import Header from "@/app/components/header/header";
 
 export default function Home() {
   const { data, isLoading } = useQuery({
-    queryKey: ["fetcList"],
-    queryFn: fetcList,
+    queryKey: ["questionList"],
+    queryFn: fetchList,
   });
-  console.log("data", data?.data[0].title);
-  return (
+    console.log(data?.data['posts']);
+
+    return (
     <main>
+      <Header title='لیست سوالات'/>
       <div>
-        {data?.data.map((item) => {
-          return <div key={item.id}>{item.title}</div>;
+        {data?.data['posts'].map((item) => {
+          return <ListPage title={item.title} id={item.id} />;
         })}
-        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
-        از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
-        سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
-        متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه
-        درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با
-        نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
-        خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
-        داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان
-        رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
-        پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
       </div>
     </main>
   );
