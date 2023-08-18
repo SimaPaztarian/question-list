@@ -40,7 +40,7 @@ export default function Modal({ handleClose, open }) {
             <Controller
               control={control}
               render={({ field }) => {
-                return <TextField margin="normal" fullWidth {...field} variant="outlined" />;
+                return <TextField margin="normal" fullWidth {...field} variant="outlined" label='عنوان سوال'/>;
               }}
               name="title"
             />
@@ -49,7 +49,7 @@ export default function Modal({ handleClose, open }) {
             <Controller
               control={control}
               render={({ field }) => {
-                return <TextField margin="normal" fullWidth {...field} variant="outlined" />;
+                return <TextField margin="normal" fullWidth {...field} variant="outlined" label='متن سوال'/>;
               }}
               name="question"
             />

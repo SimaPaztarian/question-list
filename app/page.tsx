@@ -19,7 +19,7 @@ export default function Home() {
         <Grid item xs={24}>
           <Header title="لیست سوالات" />
           {data?.data?.map((item) => {
-            return <QuestionCard label="question" item={item} />;
+            return <QuestionCard key={item.id} label="question" item={item} />;
           })}
         </Grid>
       </Grid>

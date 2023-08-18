@@ -12,7 +12,8 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import { useState } from "react";
-export default function QuestionCard({ label, item }) {
+export default function QuestionCard(props) {
+  const { label, item } = props;
   const [like, setLike] = useState(0);
   const [disLike, setDisLike] = useState(0);
   return (
@@ -33,7 +34,7 @@ export default function QuestionCard({ label, item }) {
           borderRadius: "8px",
           fontSize: "16px",
         }}
-        title={item?.title}
+        title={item?.title || 'مهسا موحد'}
         avatar={<Avatar alt="user" src="/static/avatar.jpg" />}
         action={
           <>
@@ -89,11 +90,16 @@ export default function QuestionCard({ label, item }) {
           {label === "question" ? item?.question : item?.body}
         </Typography>
         {label == "answer" && (
-            <div style={{direction:'ltr'}}>
+          <div style={{ direction: "ltr" }}>
             <CardActions disableSpacing>
               <Button
                 variant="outlined"
-                sx={{display:'inline-block',color:"#66CB9F",borderColor:'#E4E9EC'}}                 endIcon={<SentimentSatisfiedAlt />}
+                sx={{
+                  display: "inline-block",
+                  color: "#66CB9F",
+                  borderColor: "#E4E9EC",
+                }}
+                endIcon={<SentimentSatisfiedAlt />}
                 onClick={() => setLike(like + 1)}
               >
                 پاسخ خوب بود
@@ -102,7 +108,12 @@ export default function QuestionCard({ label, item }) {
             <CardActions disableSpacing>
               <Button
                 variant="outlined"
-                sx={{display:'inline-block',color:"#F16063",borderColor:'#E4E9EC'}}                 endIcon={<SentimentVeryDissatisfied />}
+                sx={{
+                  display: "inline-block",
+                  color: "#F16063",
+                  borderColor: "#E4E9EC",
+                }}
+                endIcon={<SentimentVeryDissatisfied />}
                 onClick={() => setDisLike(disLike + 1)}
               >
                 پاسخ خوب نبود
@@ -110,20 +121,28 @@ export default function QuestionCard({ label, item }) {
             </CardActions>
           </div>
         )}
-          <div style={{direction:'ltr'}}>
-        {(label == "question") & (document.location.pathname == "/") && (
-          <Link
-            href={{
-              pathname: `/question-details/${item?.id}`,
-            }}
-          >
-            <Button variant="outlined" sx={{color:"#27AE60",borderColor:'#27AE60'}} >
-              مشاهده جزییات
-            </Button>
-          </Link>
-        )}
-          </div>
-
+        <div style={{ direction: "ltr" }}>
+          {(label == "question") & (document.location.pathname == "/") && (
+            <Link
+              href={{
+                pathname: `/question-details/${item?.id}`,
+              }}
+              onClick={() =>
+                sessionStorage.setItem(
+                  `/question-details/${item?.id}`,
+                  JSON.stringify(props)
+                )
+              }
+            >
+              <Button
+                variant="outlined"
+                sx={{ color: "#27AE60", borderColor: "#27AE60" }}
+              >
+                مشاهده جزییات
+              </Button>
+            </Link>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
