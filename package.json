@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev ",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "json-server": "json-server --watch db.json --port 8080"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -18,13 +19,17 @@
     "next": "13.4.13",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
     "sass": "^1.65.1",
-    "sharp": "^0.32.4"
+    "sharp": "^0.32.4",
+    "stylis": "^4.3.0",
+    "stylis-plugin-rtl": "^2.1.1"
   },
   "devDependencies": {
     "@types/node": "20.4.9",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "@types/stylis": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",

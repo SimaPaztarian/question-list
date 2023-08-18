@@ -9,9 +9,9 @@ export default function Page() {
   return (
     <>
       <Header title="جزییات سوال" />
-      <QuestionCard />
+      <QuestionCard label='question'/>
       <h1>پاسخ ها</h1>
-      <QuestionCard />
+      <QuestionCard label='answer'/>
       <h1>پاسخ خود را ثبت کنید:</h1>
         <TextField
             sx={{

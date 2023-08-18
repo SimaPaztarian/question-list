@@ -1,29 +1,25 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {Avatar, CardHeader} from "@mui/material";
+import { Avatar, CardHeader, IconButton } from "@mui/material";
+import {SentimentSatisfiedAlt,SentimentVeryDissatisfied} from "@mui/icons-material";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
-
-export default function QuestionCard() {
+export default function QuestionCard({ label }) {
   return (
-    <Card sx={{ minWidth: 275 }}>
-        <CardHeader
-            title="Sports"
-            avatar={<Avatar alt="Apple" src="https://www.w3schools.com/howto/img_avatar.png" />}
-        />
-        <hr />
+    <Card sx={{ minWidth: 275 }} label={label}>
+      <CardHeader
+        title="heading"
+        avatar={
+          <Avatar
+            alt="user"
+            src="https://www.w3schools.com/howto/img_avatar.png"
+          />
+        }
+      />
+      <hr />
       <CardContent>
         <Typography
           sx={{ fontSize: 14 }}
@@ -31,13 +27,32 @@ export default function QuestionCard() {
           variant="solid"
           gutterBottom
         >
-          Word of the Day
+            content
         </Typography>
-        <div>title</div>
+
+        {label == "answer" && (
+          <>
+            <CardActions disableSpacing>
+              <Button
+                variant="outlined"
+                color="success"
+                endIcon={<SentimentSatisfiedAlt />}
+              >
+                پاسخ خوب بود
+              </Button>
+            </CardActions>
+            <CardActions disableSpacing>
+              <Button
+                variant="outlined"
+                color="error"
+                endIcon={<SentimentVeryDissatisfied />}
+              >
+                پاسخ خوب نبود
+              </Button>
+            </CardActions>
+          </>
+        )}
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }
