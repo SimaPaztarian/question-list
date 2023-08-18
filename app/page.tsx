@@ -1,28 +1,28 @@
 "use client";
 
-import { fetchList } from "@/app/services/api";
+import { getQuestions } from "@/app/services/api";
 import { useQuery } from "@tanstack/react-query";
-import ListPage from "@/app/containers/listPage";
 import Header from "@/app/components/header/header";
-import {Container} from "@mui/system";
+import { Container } from "@mui/system";
+import QuestionCard from "@/app/components/card/card";
+import { Grid } from "@mui/material";
 
 export default function Home() {
   const { data, isLoading } = useQuery({
     queryKey: ["questionList"],
-    queryFn: fetchList,
+    queryFn: getQuestions,
   });
 
-
-    return (
+  return (
     <main>
-      <Container maxWidth='100%'>
-      <Header title='لیست سوالات'/>
-      <div>
-        {data?.data?.map((item) => {
-          return <ListPage title={item.title} question={item.question} id={item.id} />;
-        })}
-      </div>
-      </Container>
+      <Grid container>
+        <Grid item xs={24}>
+          <Header title="لیست سوالات" />
+          {data?.data?.map((item) => {
+            return <QuestionCard label="question" item={item} />;
+          })}
+        </Grid>
+      </Grid>
     </main>
   );
 }

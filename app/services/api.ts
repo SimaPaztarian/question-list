@@ -11,10 +11,17 @@ instance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export const fetchList = () => {
+export const getQuestions = () => {
   return instance.get("/posts", {});
 };
 
+export const getAnswers = () => {
+    return instance.get("/comments", {});
+};
 export const postNewQuestion = (body: { title: string; question: string }) => {
   return instance.post("/posts", body );
+};
+
+export const postNewAnswer = (body: { postId: string; body: string }) => {
+    return instance.post("/comments", body );
 };
