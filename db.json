@@ -31,8 +31,8 @@
       "id": 6
     },
     {
-      "title": "fsfr",
-      "question": "fregreg",
+      "title": "سوال 5",
+      "question": "متن سوال 5",
       "id": 7
     }
   ],
@@ -69,48 +69,8 @@
     },
     {
       "postId": 4,
-      "body": "456415245",
+      "body": "Text fields allow users to enter text into a UI. They typically appear in forms and dialogs.",
       "id": 7
-    },
-    {
-      "postId": 4,
-      "body": "456415245",
-      "id": 8
-    },
-    {
-      "postId": 4,
-      "body": "",
-      "id": 9
-    },
-    {
-      "postId": 4,
-      "body": "",
-      "id": 10
-    },
-    {
-      "postId": 6,
-      "body": "لورم ایپسوم",
-      "id": 11
-    },
-    {
-      "postId": 6,
-      "body": "لورم ایپسوم",
-      "id": 12
-    },
-    {
-      "postId": 1,
-      "body": "155615",
-      "id": 13
-    },
-    {
-      "postId": 1,
-      "body": "21354653",
-      "id": 14
-    },
-    {
-      "postId": 1,
-      "body": "",
-      "id": 15
     }
   ],
   "profile": {

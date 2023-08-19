@@ -71,7 +71,7 @@ export default function QuestionCard(props) {
         }
       />
       <CardContent sx={{ background: "#F9F9F9" }}>
-        <Typography variant="solid" gutterBottom>
+        <Typography variant="solid" align="justify" sx={{fontSize:"1rem"}}>
           {label === "question" ? item?.question : item?.body}
         </Typography>
         {label == "answer" && (

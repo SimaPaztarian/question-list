@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import QuestionCard from "@/components/card";
 import Header from "@/components/header";
 import Button from "@mui/material/Button";
@@ -9,18 +9,23 @@ import { postNewAnswer } from "@/services/api";
 import { Controller, useForm } from "react-hook-form";
 import Typography from "@mui/material/Typography";
 export default function DetailPage({ params }) {
+
   //refetching getAnswer request
   const queryClient = useQueryClient();
+  const [answerList,setAnswerList]=useState()
   const handleRefetch = () => {
-    queryClient.refetchQueries(["answerList"]);
+    queryClient.refetchQueries(["answerList"]).then(()=>
+       setAnswerList(queryClient.getQueryData(["answerList"])?.data)
+  );
   };
-
-  const answerList = queryClient.getQueryData(["answerList"]);
-  useEffect(() => {
-    if (typeof answerList=='undefined') {
-      handleRefetch();
-    }
-  }, [answerList]);
+  useEffect(
+    (answerList) => {
+      if (typeof answerList == "undefined") {
+        handleRefetch();
+      }
+    },
+    [answerList]
+  );
 
   //get questionData from storage
   const selectedQuestion = JSON.parse(
@@ -60,7 +65,7 @@ export default function DetailPage({ params }) {
       >
         پاسخ ها
       </Typography>
-      {answerList?.data
+      {answerList
         ?.filter((item) => item.postId === selectedQuestion?.item?.id)
         .map((answer) => {
           return <QuestionCard key={answer?.id} label="answer" item={answer} />;

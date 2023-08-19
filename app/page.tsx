@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Grid } from "@mui/material";
 import Header from "@/components/header";
 import QuestionCard from "@/components/card";
-import {getAnswers, getQuestions} from "@/services/api";
+import { getQuestions} from "@/services/api";
 
 export default function Home() {
   const { data:questionList } = useQuery({
