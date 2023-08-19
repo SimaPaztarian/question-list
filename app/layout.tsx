@@ -26,7 +26,6 @@ const theme = createTheme({
     fontFamily: "IRANSans, Roboto, Tahoma, serif",
   },
 });
-
 export default function RootLayout({
   children,
 }: {
