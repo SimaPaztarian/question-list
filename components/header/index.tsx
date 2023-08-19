@@ -2,7 +2,7 @@ import React from "react";
 import { AppBar, Toolbar, Typography, Button, Avatar } from "@mui/material";
 import Modal from "@/components/modal";
 
-const Index = ({ title }) => {
+const Header = ({ title }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -27,6 +27,7 @@ const Index = ({ title }) => {
         <Button
           color="inherit"
           sx={{
+            marginRight: "1rem",
             background: "#27AE60",
             "&:hover": {
               background: "#1f8c4d",
@@ -34,10 +35,16 @@ const Index = ({ title }) => {
           }}
           onClick={handleClickOpen}
         >
-           سوال جدید +
+          سوال جدید +
         </Button>
-        <Modal open={open} handleClose={handleClose} />
-        <Avatar alt="Avatar" src="/static/avatar.jpg" />
+        <Modal open={open} handleClose={handleClose}/>
+        <Avatar
+          sx={{
+            marginRight: "1rem",
+          }}
+          alt="Avatar"
+          src="/static/avatar.jpg"
+        />
         <Typography variant="h10" sx={{ color: "black" }}>
           مهسا موحد
         </Typography>
@@ -46,4 +53,4 @@ const Index = ({ title }) => {
   );
 };
 
-export default Index;
+export default Header;

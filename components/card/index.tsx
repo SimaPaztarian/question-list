@@ -38,34 +38,36 @@ export default function QuestionCard(props) {
     >
       <CardHeader
         sx={{
+          display: "flex",
+          flexWrap: "wrap",
           background: "#FFFFFF",
           boxShadow:
             "0px 0px 1px 0px rgba(12, 26, 75, 0.24), 0px 3px 8px -1px rgba(50, 50, 71, 0.05)",
           borderRadius: "8px",
-          fontSize: "16px",
+          fontSize: "14px",
         }}
         title={item?.title || "مهسا موحد"}
         avatar={<Avatar alt="user" src="/static/avatar.jpg" />}
         action={
-          <>
-            <span>
+          <div style={{marginTop:'1rem'}}>
+            <span style={{ marginLeft: "1rem" }}>
               ساعت: 13:03 | تاریخ: 1402/05/27
-              {label == "answer" && (
-                <>
-                  <SentimentSatisfiedAlt />
-                  <span>{like}</span>
-                  <SentimentVeryDissatisfied />
-                  <span>{disLike}</span>
-                </>
-              )}
-              {label == "question" && (
-                <>
-                  <ChatOutlined />
-                  <span>{comments || 0}</span>
-                </>
-              )}
             </span>
-          </>
+            {label == "answer" && (
+              <>
+                <SentimentSatisfiedAlt sx={{verticalAlign:'bottom',color: "#66CB9F"}}/>
+                <span style={{ marginLeft: ".5rem",color: "#66CB9F" }}>{like}</span>
+                <SentimentVeryDissatisfied sx={{verticalAlign:'bottom',color: "#F16063"}}/>
+                <span style={{ color: "#F16063" }}>{disLike}</span>
+              </>
+            )}
+            {label == "question" && (
+              < >
+                <ChatOutlined sx={{marginRight:'.5rem',verticalAlign:'bottom'}}/>
+                  <span>{comments || 0}</span>
+              </>
+            )}
+          </div>
         }
       />
       <CardContent sx={{ background: "#F9F9F9" }}>
@@ -73,39 +75,41 @@ export default function QuestionCard(props) {
           {label === "question" ? item?.question : item?.body}
         </Typography>
         {label == "answer" && (
-          <div style={{ direction: "ltr" }}>
+          <div style={{ display: "flex", flexDirection: "row-reverse" }}>
             <CardActions disableSpacing>
               <Button
                 variant="outlined"
                 sx={{
-                  display: "inline-block",
-                  color: "#66CB9F",
-                  borderColor: "#E4E9EC",
-                }}
-                endIcon={<SentimentSatisfiedAlt />}
-                onClick={() => setLike(like + 1)}
-              >
-                پاسخ خوب بود
-              </Button>
-            </CardActions>
-            <CardActions disableSpacing>
-              <Button
-                variant="outlined"
-                sx={{
-                  display: "inline-block",
                   color: "#F16063",
                   borderColor: "#E4E9EC",
                 }}
-                endIcon={<SentimentVeryDissatisfied />}
+                endIcon={
+                  <SentimentVeryDissatisfied sx={{ paddingRight: ".5rem" }} />
+                }
                 onClick={() => setDisLike(disLike + 1)}
               >
                 پاسخ خوب نبود
               </Button>
             </CardActions>
+            <CardActions>
+              <Button
+                variant="outlined"
+                sx={{
+                  color: "#66CB9F",
+                  borderColor: "#E4E9EC",
+                }}
+                endIcon={
+                  <SentimentSatisfiedAlt sx={{ paddingRight: ".5rem" }} />
+                }
+                onClick={() => setLike(like + 1)}
+              >
+                پاسخ خوب بود
+              </Button>
+            </CardActions>
           </div>
         )}
         <div style={{ direction: "ltr" }}>
-          {(label == "question") & (document.location.pathname == "/") && (
+          {label == "question" && document.location.pathname == "/" && (
             <Link
               href={{
                 pathname: `/question-details/${item?.id}`,

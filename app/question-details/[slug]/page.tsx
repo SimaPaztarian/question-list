@@ -14,10 +14,13 @@ export default function DetailPage({ params }) {
   const handleRefetch = () => {
     queryClient.refetchQueries(["answerList"]);
   };
-  useEffect(() => {
-    handleRefetch();
-  }, []);
+
   const answerList = queryClient.getQueryData(["answerList"]);
+  useEffect(() => {
+    if (typeof answerList=='undefined') {
+      handleRefetch();
+    }
+  }, [answerList]);
 
   //get questionData from storage
   const selectedQuestion = JSON.parse(
@@ -25,7 +28,7 @@ export default function DetailPage({ params }) {
   );
   const parentId = selectedQuestion?.item?.id;
   //form values
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, resetField } = useForm({
     defaultValues: {
       postId: parentId,
       body: "",
@@ -43,12 +46,14 @@ export default function DetailPage({ params }) {
   });
   const onSubmit = (data) => {
     mutate(data);
+    resetField("body");
   };
   return (
     <div style={{ direction: "rtl" }}>
       <Header title="جزییات سوال" />
       <QuestionCard label="question" item={selectedQuestion?.item} />
       <Typography
+        variant="h6"
         sx={{
           margin: "1rem 3.5rem 0 3.5rem",
         }}
@@ -61,24 +66,27 @@ export default function DetailPage({ params }) {
           return <QuestionCard key={answer?.id} label="answer" item={answer} />;
         })}
       <Typography
+        variant="h6"
         sx={{
           margin: "1rem 3.5rem 0 3.5rem",
         }}
       >
         پاسخ خود را ثبت کنید:
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: "90%" }}>
         <Controller
           control={control}
           render={({ field }) => {
             return (
               <TextField
                 {...field}
-                sx={{
-                  width: 300,
-                }}
+                fullWidth
                 InputProps={{
-                  sx: { height: 80, margin: "1rem 3.5rem 0 3.5rem" },
+                  sx: {
+                    height: 80,
+                    margin: "1rem 3.5rem 0 3.5rem",
+                    background: "#ffffff",
+                  },
                 }}
                 placeholder="متن پاسخ"
               />

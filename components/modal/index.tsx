@@ -5,11 +5,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import {IconButton, InputLabel, TextField} from "@mui/material";
+import { IconButton, InputLabel, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postNewQuestion } from "@/services/api";
-import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
+import { CloseIcon } from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
 
 export default function Modal({ handleClose, open }) {
   const queryClient = useQueryClient();
@@ -42,6 +42,8 @@ export default function Modal({ handleClose, open }) {
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      fullWidth
+      maxWidth="sm"
     >
       <DialogTitle id="alert-dialog-title">
         ایجاد سوال جدید
@@ -89,6 +91,8 @@ export default function Modal({ handleClose, open }) {
                       <InputLabel>متن سوال</InputLabel>
                       <TextField
                         margin="normal"
+                        multiline
+                        maxRows={5}
                         fullWidth
                         {...field}
                         variant="outlined"
